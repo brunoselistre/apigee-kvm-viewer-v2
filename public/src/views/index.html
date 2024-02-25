@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apigee KVM Manager</title>
+    <link rel="stylesheet" href="../styles/index.css">
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="../resources/img/logo-kvm.png" alt="Logo">
+        </div>
+        <h1 class="title">Apigee KVM Manager</h1>
+        <div class="form">
+            <input type="text" id="organization" name="organization" placeholder="Organization">
+            <input type="text" id="token" name="token" placeholder="Token">
+            <button type="submit" onclick="submitAuthorization()">Submit</button>
+        </div>
+    </div>
+
+    <!--------------------------- Imports ---------------------------->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../scripts/index.js"></script>
+
+</body>
+</html>

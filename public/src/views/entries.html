@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entries</title>
+    <link rel="stylesheet" href="../../styles/entries.css">
+</head>
+<body>
+    <div class="container">
+        <div class="title-kvms">
+            <h1 class="title">KVM</h1>
+            <button class="refresh-btn" aria-label="Refresh" onclick="refreshPage()">
+                <svg fill="#000000" height="20px" width="20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 489.645 489.645" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M460.656,132.911c-58.7-122.1-212.2-166.5-331.8-104.1c-9.4,5.2-13.5,16.6-8.3,27c5.2,9.4,16.6,13.5,27,8.3 c99.9-52,227.4-14.9,276.7,86.3c65.4,134.3-19,236.7-87.4,274.6c-93.1,51.7-211.2,17.4-267.6-70.7l69.3,14.5 c10.4,2.1,21.8-4.2,23.9-15.6c2.1-10.4-4.2-21.8-15.6-23.9l-122.8-25c-20.6-2-25,16.6-23.9,22.9l15.6,123.8 c1,10.4,9.4,17.7,19.8,17.7c12.8,0,20.8-12.5,19.8-23.9l-6-50.5c57.4,70.8,170.3,131.2,307.4,68.2 C414.856,432.511,548.256,314.811,460.656,132.911z"></path> </g> </g></svg>
+            </button>          
+        </div>
+        <div class="table-view">
+            <div class="header">
+                <div class="search">
+                    <input type="text" id="search" name="search" placeholder="Search">
+                    <button class="search-btn">Search</button>
+                </div>
+                <button class="add-entry-btn">Add Entry +</button>
+            </div>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Key</th>
+                        <th>Value</th>
+                        <th>Action</th> <!-- Added a column for the remove icon -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Key 1</td>
+                        <td>Value 1</td>
+                        <td>
+                            <button class="remove-icon-btn" aria-label="Remove">
+                                <svg viewPort="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg"> <line x1="1" y1="11" x2="11" y2="1" stroke="red" stroke-width="2"/> <line x1="1" y1="1" x2="11" y2="11" stroke="red" stroke-width="2"/></svg>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Key 2</td>
+                        <td>Value 2</td>
+                        <td>
+                            <button class="remove-icon-btn" aria-label="Remove">
+                                <svg viewPort="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg"> <line x1="1" y1="11" x2="11" y2="1" stroke="red" stroke-width="2"/> <line x1="1" y1="1" x2="11" y2="11" stroke="red" stroke-width="2"/></svg>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Key 3</td>
+                        <td>Value 3</td>
+                        <td>
+                            <button class="remove-icon-btn" aria-label="Remove">
+                                <svg viewPort="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg"> <line x1="1" y1="11" x2="11" y2="1" stroke="red" stroke-width="2"/> <line x1="1" y1="1" x2="11" y2="11" stroke="red" stroke-width="2"/></svg>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Key 3</td>
+                        <td>Value 3</td>
+                        <td>
+                            <button class="remove-icon-btn" aria-label="Remove">
+                                <svg viewPort="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg"> <line x1="1" y1="11" x2="11" y2="1" stroke="red" stroke-width="2"/> <line x1="1" y1="1" x2="11" y2="11" stroke="red" stroke-width="2"/></svg>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Key 3</td>
+                        <td>Value 3</td>
+                        <td>
+                            <button class="remove-icon-btn" aria-label="Remove">
+                                <svg viewPort="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg"> <line x1="1" y1="11" x2="11" y2="1" stroke="red" stroke-width="2"/> <line x1="1" y1="1" x2="11" y2="11" stroke="red" stroke-width="2"/></svg>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Key 3</td>
+                        <td>Value 3</td>
+                        <td>
+                            <button class="remove-icon-btn" aria-label="Remove">
+                                <svg viewPort="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg"> <line x1="1" y1="11" x2="11" y2="1" stroke="red" stroke-width="2"/> <line x1="1" y1="1" x2="11" y2="11" stroke="red" stroke-width="2"/></svg>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Key 3</td>
+                        <td>Value 3</td>
+                        <td>
+                            <button class="remove-icon-btn" aria-label="Remove">
+                                <svg viewPort="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg"> <line x1="1" y1="11" x2="11" y2="1" stroke="red" stroke-width="2"/> <line x1="1" y1="1" x2="11" y2="11" stroke="red" stroke-width="2"/></svg>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Key 3</td>
+                        <td>Value 3</td>
+                        <td>
+                            <button class="remove-icon-btn" aria-label="Remove">
+                                <svg viewPort="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg"> <line x1="1" y1="11" x2="11" y2="1" stroke="red" stroke-width="2"/> <line x1="1" y1="1" x2="11" y2="11" stroke="red" stroke-width="2"/></svg>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Key 3</td>
+                        <td>Value 3</td>
+                        <td>
+                            <button class="remove-icon-btn" aria-label="Remove">
+                                <svg viewPort="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg"> <line x1="1" y1="11" x2="11" y2="1" stroke="red" stroke-width="2"/> <line x1="1" y1="1" x2="11" y2="11" stroke="red" stroke-width="2"/></svg>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+                
+            </table>
+            <div class="pagination">
+                <button class="prev-btn">Prev</button>
+                <span class="page-info">Page 1 of 10</span>
+                <button class="next-btn">Next</button>
+            </div>
+        </div>
+    </div>
+    <!-- Popup Overlay -->
+    <div class="overlay" id="popup-overlay">
+        <div class="popup">
+            <h2 class="popup-title">Entries:</h2>
+            <input type="text" class="popup-input" placeholder="[{'key': '', 'value': '' }]">
+            <div class="popup-buttons">
+                <button class="cancel-btn">Cancel</button>
+                <button class="confirm-btn">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!--------------------------- Imports ---------------------------->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../../scripts/index.js"></script>
+</body>
+</html>
