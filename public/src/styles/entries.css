@@ -5,7 +5,7 @@ body {
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
+    height: 100%;
     background-color: #f2f2f2;
 }
 
@@ -39,8 +39,6 @@ body {
     justify-content: space-between;
 }
 
-
-
 .add-entry-btn {
     padding: 10px 20px;
     border-radius: 5px;
@@ -60,6 +58,7 @@ body {
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-height: 70%;
 
 }
 

@@ -1,19 +1,15 @@
 window.addEventListener('beforeunload', () => localStorage.clear());
 
-async function listEntries(kvm) {
-    const fetch_entries = await api.get(`/api/kvms/${kvm}/entries`);
+async function getEntriesView(kvm) {
     window.location.href = `/kvms/${kvm}/entries`;
-    console.log(fetch_entries.data.keyValueEntries);
-
 }
 
 async function listKeyValueMaps() {
     try {
+        // Handle environments
         const fetch_environments = await api.get(`/api/environments`);
         const environments = await fetch_environments.data;
-
         let environments_toggle = document.getElementById('environment-list');
-
         if(localStorage.getItem("environment") == null) {
             localStorage.setItem("environment", environments[0]);
 
@@ -25,11 +21,13 @@ async function listKeyValueMaps() {
             });
         }
 
+        // Show KVMs
         const fetch_kvms = await api.get(`/api/kvms`);
-        const kvms = await fetch_kvms.data;
-        let kvms_list = document.getElementById('kvm-list')
+        let kvms = await fetch_kvms.data;
+        let kvms_list = document.getElementById('kvm-list');
+
         kvms_list.innerHTML = ''
-        kvms.forEach(async (kvm) => {
+        kvms.sort().forEach(async (kvm) => {
             const list_item = document.createElement('li');
             list_item.textContent = kvm;
             list_item.className = 'list-item';
@@ -41,7 +39,7 @@ async function listKeyValueMaps() {
             list_item.appendChild(delete_btn);
             kvms_list.appendChild(list_item); 
             
-            list_item.addEventListener('click', async () => listEntries(await kvm))            
+            list_item.addEventListener('click', async () => getEntriesView(await kvm))            
         });
     } catch (error) {
         console.log(error);
@@ -61,7 +59,3 @@ async function updateEnvironment() {
     }
 
 }
-
-function sortByAlphabetical(list, attribute) {
-    return list.sort((a, b) => a[attribute].localeCompare(b[attribute]));
-};

@@ -60,9 +60,8 @@ app.get('/api/kvms', async (req, res) => {
 app.get('/api/kvms/:kvm/entries', async (req, res) => {
   const kvm = req.params.kvm;
   const entries = await apigee_api.listEntries(apigee, TOKEN, ORG, ENV, kvm);
-  console.log(entries);
 
-  res.json(entries || []);
+  res.json(entries || {});
 })
 
 app.get('/api/health-check', async (req, res) => {

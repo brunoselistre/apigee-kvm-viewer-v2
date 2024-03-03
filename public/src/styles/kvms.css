@@ -72,13 +72,18 @@ input[type="text"], .search-btn, .prev-btn, .next-btn, .new-kvm-btn {
     border: 1px solid #ccc;
 }
 
-.search-btn, .prev-btn, .next-btn, .new-kvm-btn {
+.search-btn {
+    background-color: #c0c0c0;
+    color: #fff;
+
+}
+/* .search-btn, */.prev-btn, .next-btn, .new-kvm-btn {
     background-color: #007bff;
     color: #fff;
     cursor: pointer;
 }
 
-.search-btn:hover, .prev-btn:hover, .next-btn:hover, .new-kvm-btn:hover {
+/* .search-btn:hover */.prev-btn:hover, .next-btn:hover, .new-kvm-btn:hover {
     background-color: #0056b3;
 }
 
