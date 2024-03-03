@@ -1,12 +1,12 @@
 window.addEventListener("beforeunload", function(event) {
+    localStorage.removeItem("kvm");
     localStorage.removeItem("nextPageToken");
 });
 
 async function listEntries() {
 
     try {
-        let currentUri = window.location.href;
-        let kvm = currentUri.match(/kvms\/([^\/]+)\/entries/)?.pop();
+        const kvm = localStorage.getItem("kvm");
 
         const fetch_entries = await api.get(`/api/kvms/${kvm}/entries`);
         let { keyValueEntries: entries, nextPageToken } = await fetch_entries.data;
