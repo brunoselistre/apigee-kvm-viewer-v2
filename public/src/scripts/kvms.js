@@ -1,5 +1,3 @@
-window.addEventListener('beforeunload', () => localStorage.clear());
-
 async function getEntriesView(kvm) {
     localStorage.setItem('kvm', kvm);
     window.location.href = `/kvms/${kvm}/entries`;

@@ -20,14 +20,14 @@
                     <input type="text" id="search" name="search" placeholder="Search">
                     <button class="search-btn">Search</button>
                 </div>
-                <button class="add-entry-btn">Add Entry +</button>
+                <button class="add-entry-btn" onclick="addEntriesPopup()">Add Entry +</button>
             </div>
             <table id="kvm-entries-table" class="data-table">
                 <thead>
                     <tr>
                         <th>Key</th>
                         <th>Value</th>
-                        <th>Action</th> <!-- Added a column for the remove icon -->
+                        <th>Action</th> 
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -41,13 +41,22 @@
         </div>
     </div>
     <!-- Popup Overlay -->
-    <div class="overlay" id="popup-overlay">
+    <div class="overlay" id="add-entries-popup">
         <div class="popup">
             <h2 class="popup-title">Entries:</h2>
-            <input type="text" class="popup-input" placeholder="[{'key': '', 'value': '' }]">
+            <textarea
+            class="popup-input" 
+            name="entry"
+            id="entries"
+            cols="40"
+            rows="5"
+            style="resize: none"
+          >[
+  { "name": "", "value": ""}
+]</textarea>
             <div class="popup-buttons">
-                <button class="cancel-btn">Cancel</button>
-                <button class="confirm-btn">Confirm</button>
+                <button class="cancel-btn" onclick="closeEntriesPopup()">Cancel</button>
+                <button class="confirm-btn" onclick="addEntries()">Confirm</button>
             </div>
         </div>
     </div>

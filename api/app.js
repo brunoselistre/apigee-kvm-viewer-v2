@@ -64,6 +64,17 @@ app.get('/api/kvms/:kvm/entries', async (req, res) => {
   res.json(entries || {});
 })
 
+app.post('/api/kvms/:kvm/entries', async (req, res) => {
+  try {
+    const kvm = req.params.kvm;
+    const body = { name: req.body.name, value: req.body.value };
+    await apigee_api.addEntry(apigee, TOKEN, ORG, ENV, kvm, body);    
+    res.status(201).send();
+  } catch (error) {
+    console.error(error);
+  }
+})
+
 app.get('/api/health-check', async (req, res) => {
   res.json({ status: "Ok" });
 })

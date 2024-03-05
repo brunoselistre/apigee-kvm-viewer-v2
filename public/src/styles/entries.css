@@ -62,6 +62,23 @@ body {
 
 }
 
+#kvm-entries-table  tbody td {
+    border-bottom: 1px solid #ccd6e0;
+    padding: 12px;
+    color: #485b6f;
+    max-width: 3.4em !important;
+    overflow: auto;
+}
+
+
+#kvm-entries-table td {
+    border-bottom: 1px solid #ccd6e0;
+    padding: 12px;
+    color: #485b6f;
+    max-width: 48em !important;
+    overflow: auto;
+}
+
 .search {
     margin-bottom: 10px;
     

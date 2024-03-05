@@ -37,8 +37,22 @@ const listEntries = async (apigee, token, organization, env, kvm) =>{
     }
 }
 
+const addEntry = async (apigee, token, organization, env, kvm, newEntry) => {
+    try {
+        const response = await apigee.post(`/v1/organizations/${organization}/environments/${env}/keyvaluemaps/${kvm}/entries`, newEntry, {
+            headers: { 
+                "Authorization": `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 module.exports = {
     listEnvironments,
     listKvms,
-    listEntries
+    listEntries,
+    addEntry
 }
