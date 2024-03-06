@@ -50,9 +50,24 @@ const addEntry = async (apigee, token, organization, env, kvm, newEntry) => {
     }
 }
 
+const deleteEntry = async (apigee, token, organization, env, kvm, entry)  => {
+    try {
+        const response = await apigee.delete(`/v1/organizations/${organization}/environments/${env}/keyvaluemaps/${kvm}/entries/${entry}`, {
+            headers: { 
+                "Authorization": `Bearer ${token}`
+            }
+        });
+
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
 module.exports = {
     listEnvironments,
     listKvms,
     listEntries,
-    addEntry
+    addEntry,
+    deleteEntry
 }

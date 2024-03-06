@@ -1,7 +1,3 @@
-window.addEventListener("beforeunload", function(event) {
-    localStorage.removeItem("kvm");
-    localStorage.removeItem("nextPageToken");
-});
 
 async function listEntries() {
     let entries;
@@ -37,6 +33,10 @@ async function listEntries() {
         delete_btn.className = 'remove-icon-btn';
         delete_btn.ariaLabel = 'Remove';
         delete_btn.innerHTML = deleteSVG;
+        delete_btn.addEventListener('click', async () => {
+            await api.delete(`/api/kvms/${kvm}/entries/${name}`, entry);
+            window.location.reload();
+        }) 
 
         delete_column.appendChild(delete_btn);
         row.appendChild(name_column);
@@ -57,7 +57,7 @@ async function addEntries() {
 
         await api.post(`/api/kvms/${kvm}/entries`, entry);
     });
-    window.location.href = window.location.href;
+    window.location.reload();
 };
 
 function addEntriesPopup() {

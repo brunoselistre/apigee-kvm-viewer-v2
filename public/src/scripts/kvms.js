@@ -4,12 +4,16 @@ async function getEntriesView(kvm) {
 }
 
 async function listKeyValueMaps() {
+    localStorage.removeItem("kvm");
+    localStorage.removeItem("nextPageToken");
+
     try {
         // Handle environments
         const fetch_environments = await api.get(`/api/environments`);
         const environments = await fetch_environments.data;
         let environments_toggle = document.getElementById('environment-list');
-        if(localStorage.getItem("environment") == null) {
+
+        if(environments_toggle.value == "" || localStorage.getItem("environment") == null) {
             localStorage.setItem("environment", environments[0]);
 
             environments.forEach(option => {

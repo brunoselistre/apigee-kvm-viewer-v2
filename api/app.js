@@ -75,6 +75,18 @@ app.post('/api/kvms/:kvm/entries', async (req, res) => {
   }
 })
 
+app.delete('/api/kvms/:kvm/entries/:entry', async (req, res) => {
+  try {
+    const kvm = req.params.kvm;
+    const entry = req.params.entry;
+
+    await apigee_api.deleteEntry(apigee, TOKEN, ORG, ENV, kvm, entry);    
+    res.status(200).send();
+  } catch (error) {
+    console.error(error);
+  }
+})
+
 app.get('/api/health-check', async (req, res) => {
   res.json({ status: "Ok" });
 })
