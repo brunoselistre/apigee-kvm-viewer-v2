@@ -11,6 +11,21 @@ const listEnvironments = async (apigee, token, organization) => {
     }
 };
 
+const createKvm = async  (apigee, token, organization, env, kvm) => {
+    try {
+        const response = await apigee.post(`/v1/organizations/${organization}/environments/${env}/keyvaluemaps`, 
+        { "name": kvm, "encrypted": true },
+        {
+            headers: { 
+                "Authorization": `Bearer ${token}`
+            }
+        });        
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 const listKvms = async (apigee, token, organization, env) => {
     try {
         const response = await apigee.get(`/v1/organizations/${organization}/environments/${env}/keyvaluemaps`, {
@@ -66,6 +81,7 @@ const deleteEntry = async (apigee, token, organization, env, kvm, entry)  => {
 
 module.exports = {
     listEnvironments,
+    createKvm,
     listKvms,
     listEntries,
     addEntry,

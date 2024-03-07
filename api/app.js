@@ -57,6 +57,17 @@ app.get('/api/kvms', async (req, res) => {
   res.json(kvms || []);
 });
 
+app.post('/api/kvms/:kvm', async (req, res) => {  
+  const kvm = req.params.kvm;
+  const newKvm = await apigee_api.createKvm(apigee, TOKEN, ORG, ENV, kvm);
+
+  if(newKvm)
+    res.status(201).send();
+  else
+    res.status(400).send();
+
+});
+
 app.get('/api/kvms/:kvm/entries', async (req, res) => {
   const kvm = req.params.kvm;
   const entries = await apigee_api.listEntries(apigee, TOKEN, ORG, ENV, kvm);

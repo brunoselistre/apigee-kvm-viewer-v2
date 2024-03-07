@@ -35,11 +35,6 @@ async function listKeyValueMaps() {
             list_item.textContent = kvm;
             list_item.className = 'list-item';
 
-            const delete_btn = document.createElement('button');
-            delete_btn.textContent = 'Delete';
-            delete_btn.className = 'delete-btn';
-        
-            list_item.appendChild(delete_btn);
             kvms_list.appendChild(list_item); 
             
             list_item.addEventListener('click', async () => getEntriesView(await kvm))            
@@ -54,9 +49,21 @@ async function updateEnvironment() {
     const environment = document.getElementById("environment-list").value;
 
     try {
-        const updateEnvironment = await api.put(`/api/environments`, { environment });
+        await api.put(`/api/environments`, { environment });
         localStorage.setItem("environment", environment);
         listKeyValueMaps();
+    } catch (error) {
+        console.log(error);
+    }
+
+}
+
+async function createKvm() {
+    const kvm = prompt("KVM name:");
+    
+    try {
+        await api.post(`/api/kvms/${kvm}`);
+        window.location.reload();        
     } catch (error) {
         console.log(error);
     }
