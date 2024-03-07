@@ -104,15 +104,15 @@ app.get('/api/health-check', async (req, res) => {
 
 /***********  UI ***********/
 app.get('/', async (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/src/views', 'index.html'));
+  res.sendFile(path.join(__dirname, '../public', 'index.html'));
 })
 
 app.get('/kvms', async (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/src/views', 'kvms.html'));
+  res.sendFile(path.join(__dirname, '../public', 'kvms.html'));
 })
 
 app.get('/kvms/:kvm/entries', async (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/src/views', 'entries.html'));
+  res.sendFile(path.join(__dirname, '../public', 'entries.html'));
 })
 
 

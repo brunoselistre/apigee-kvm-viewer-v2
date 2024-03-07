@@ -20,7 +20,7 @@ async function listEntries() {
 
     let entries_table = document.querySelector("#kvm-entries-table > tbody");
     entries_table.innerHTML = '';
-    entries?.forEach(entry => {
+    entries?.sort().forEach(entry => {
         let {name: key, value} = entry;
         let row           = document.createElement('tr');
         let name_column   = document.createElement('td');
@@ -51,14 +51,17 @@ async function deleteEntry(kvm, key) {
     let confirmDelete = confirm(`Confirm deletion of key: \n- ${key}`);
 
     if (confirmDelete) {
-        await api.delete(`/api/kvms/${kvm}/entries/${key}`);
-        window.location.reload();
+        try {
+            await api.delete(`/api/kvms/${kvm}/entries/${key}`);
+            window.location.reload();
+        } catch (error) {
+            console.log(error);            
+        }
     }
 }
 
 async function addEntries() {
     let kvm = localStorage.getItem("kvm");
-    
     let entries = document.getElementById("entries").value;
 
     JSON.parse(entries).forEach(async (entry) => {
@@ -66,6 +69,10 @@ async function addEntries() {
             return alert("Empty or invalid entries format")
 
         await api.post(`/api/kvms/${kvm}/entries`, entry);
+
+        // Sleep to prevent spike arrests
+        const SLEEP_TIME = 200;
+        sleep(SLEEP_TIME);
     });
     window.location.reload();
 };
@@ -77,3 +84,8 @@ function addEntriesPopup() {
 function closeEntriesPopup() {
     document.getElementById("add-entries-popup").style.display = "none";
 };
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+  
