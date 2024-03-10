@@ -3,9 +3,9 @@
 This is a simple graphic tool, developed to simplify the visualization and management of Apigee X KVMs.
 
 ## Usage
-1. Go to src
+1. Go to ./src
 ```
-cd src
+cd ./src
 ```
 2. Install the dependencies
 ```
