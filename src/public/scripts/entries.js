@@ -66,8 +66,11 @@ async function addEntries() {
     JSON.parse(entries).forEach(async (entry) => {
         if(entry.name === "" || entry.value === "" || typeof entry.name !== "string"|| typeof entry.value !== "string")
             return alert("Empty or invalid entries format")
-
-        await api.post(`/api/kvms/${kvm}/entries`, entry);
+        try {
+            await api.post(`/api/kvms/${kvm}/entries`, entry);            
+        } catch (error) {
+            alert(error.message)
+        }
 
         // Sleep to prevent spike arrests
         const SLEEP_TIME = 200;
@@ -75,31 +78,6 @@ async function addEntries() {
     });
     window.location.reload();
 };
-
-
-function addEntriesPopup() {
-    document.getElementById("add-entries-popup").style.display = "flex";
-};
-
-function closeEntriesPopup() {
-    document.getElementById("add-entries-popup").style.display = "none";
-};
-
-function searchEntries() {
-    const searchInput = document.getElementById('search-entry');
-    const table = document.getElementById('kvm-entries-table');
-    const rows = table.querySelectorAll('tbody tr');
-    const searchValue = searchInput.value.toLowerCase();
-
-    rows.forEach(row => {
-        const cells = row.querySelectorAll('td');
-        const text = cells[0].textContent.toLowerCase();
-        if (text.includes(searchValue))
-            row.style.display = 'table-row';
-        else
-            row.style.display = 'none';
-    });
-}
 
 async function exportEntries() {
     const kvm = localStorage.getItem('kvm');
@@ -125,6 +103,30 @@ async function exportEntries() {
         link.click();
         document.body.removeChild(link);    
     }
+}
+
+function addEntriesPopup() {
+    document.getElementById("add-entries-popup").style.display = "flex";
+}
+
+function closeEntriesPopup() {
+    document.getElementById("add-entries-popup").style.display = "none";
+}
+
+function searchEntries() {
+    const searchInput = document.getElementById('search-entry');
+    const table = document.getElementById('kvm-entries-table');
+    const rows = table.querySelectorAll('tbody tr');
+    const searchValue = searchInput.value.toLowerCase();
+
+    rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        const text = cells[0].textContent.toLowerCase();
+        if (text.includes(searchValue))
+            row.style.display = 'table-row';
+        else
+            row.style.display = 'none';
+    });
 }
 
 function sleep(ms) {
