@@ -5,7 +5,7 @@ const axios = require('axios');
 const app = express();
 const apigee_api = require('./src/apigee-api');
 
-app.use(express.static(path.join(__dirname, '../public/src')));
+app.use(express.static('public'));
 app.use(express.json());
 
 const PORT = 8000;
@@ -49,7 +49,6 @@ app.put('/api/environments', async (req, res) => {
   ENV = req.body.environment;
   res.status(200).send();
 });
-
 
 app.get('/api/kvms', async (req, res) => {  
   const kvms = await apigee_api.listKvms(apigee, TOKEN, ORG, ENV);
@@ -104,15 +103,15 @@ app.get('/api/health-check', async (req, res) => {
 
 /***********  UI ***********/
 app.get('/', async (req, res) => {
-  res.sendFile(path.join(__dirname, '../public', 'index.html'));
+  res.sendFile(path.join(__dirname, '../public', 'index.html'), );
 })
 
 app.get('/kvms', async (req, res) => {
-  res.sendFile(path.join(__dirname, '../public', 'kvms.html'));
+  res.sendFile(path.join(__dirname, '../views', 'kvms.html'));
 })
 
 app.get('/kvms/:kvm/entries', async (req, res) => {
-  res.sendFile(path.join(__dirname, '../public', 'entries.html'));
+  res.sendFile(path.join(__dirname, '../views', 'entries.html'));
 })
 
 
