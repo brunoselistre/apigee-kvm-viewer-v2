@@ -26,6 +26,7 @@ async function submitAuthorization() {
         }
     } catch (error) {
         console.log(error);
+        alert("Invalid token")
     }
     
 }

@@ -1,4 +1,3 @@
-
 async function listEntries() {
     let entries;
     let nextPageToken;
@@ -77,6 +76,7 @@ async function addEntries() {
     window.location.reload();
 };
 
+
 function addEntriesPopup() {
     document.getElementById("add-entries-popup").style.display = "flex";
 };
@@ -84,6 +84,48 @@ function addEntriesPopup() {
 function closeEntriesPopup() {
     document.getElementById("add-entries-popup").style.display = "none";
 };
+
+function searchEntries() {
+    const searchInput = document.getElementById('search-entry');
+    const table = document.getElementById('kvm-entries-table');
+    const rows = table.querySelectorAll('tbody tr');
+    const searchValue = searchInput.value.toLowerCase();
+
+    rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        const text = cells[0].textContent.toLowerCase();
+        if (text.includes(searchValue))
+            row.style.display = 'table-row';
+        else
+            row.style.display = 'none';
+    });
+}
+
+async function exportEntries() {
+    const kvm = localStorage.getItem('kvm');
+    const env = localStorage.getItem('environment');
+    let entries = [];
+
+    try {
+        const fetch_entries = await api.get(`/api/kvms/${kvm}/entries`);
+        entries = await fetch_entries?.data?.keyValueEntries;
+    } catch (error) {
+        console.log(error);
+    }
+
+    if(entries.length > 0) {
+        const jsonString = JSON.stringify(entries);
+        const blob = new Blob([jsonString], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        
+        link.href = url;
+        link.download = `${kvm}_${env}`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);    
+    }
+}
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));

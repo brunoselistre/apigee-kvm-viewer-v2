@@ -17,8 +17,9 @@
         <div class="table-view">
             <div class="header">
                 <div class="search">
-                    <input type="text" id="search" name="search" placeholder="Search">
-                    <button class="search-btn">Search</button>
+                    <input type="text" id="search-entry" name="search" placeholder="Search">
+                    <button class="search-btn" onclick="searchEntries()">Search</button>
+                    <button class="export-btn" onclick="exportEntries()">Export</button>
                 </div>
                 <button class="add-entry-btn" onclick="addEntriesPopup()">Add Entry +</button>
             </div>

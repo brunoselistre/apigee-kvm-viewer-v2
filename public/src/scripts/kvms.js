@@ -69,3 +69,19 @@ async function createKvm() {
     }
 
 }
+
+function searchKvm() {
+    const kvms_list = document.getElementById('kvm-list');
+    const kvms = kvms_list.querySelectorAll('li');
+    const searchInput = document.getElementById("search-kvm");
+    const searchValue = searchInput.value.toLowerCase();
+
+    kvms.forEach(kvm => {
+        const text = kvm.textContent.toLowerCase();
+        if (text.includes(searchValue)) {
+            kvm.style.display = 'block';
+        } else {
+            kvm.style.display = 'none';
+        }
+    });
+}

@@ -88,21 +88,21 @@ body {
     display: flex;
 }
 
-input[type="text"], .search-btn, .prev-btn, .next-btn, .popup-input {
+input[type="text"], .export-btn, .search-btn, .prev-btn, .next-btn, .popup-input {
     padding: 10px;
     margin: 5px;
     border-radius: 5px;
     border: 1px solid #ccc;
 }
 
-.search-btn, .prev-btn, .next-btn, .cancel-btn, .confirm-btn {
+.export-btn, .search-btn, .prev-btn, .next-btn, .cancel-btn, .confirm-btn {
     background-color: #007bff;
     color: #fff;
     cursor: pointer;
     border: none;
 }
 
-.search-btn:hover, .prev-btn:hover, .next-btn:hover, .cancel-btn:hover, .confirm-btn:hover {
+.export-btn:hover, .search-btn:hover, .prev-btn:hover, .next-btn:hover, .cancel-btn:hover, .confirm-btn:hover {
     background-color: #0056b3;
 }
 
