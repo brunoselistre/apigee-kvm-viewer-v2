@@ -1,3 +1,7 @@
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+  
 async function listEntries() {
     let entries;
     let nextPageToken;
@@ -45,8 +49,38 @@ async function listEntries() {
     });
 };
 
+function addEntriesPopup() {
+    document.getElementById("add-entries-popup").style.display = "flex";
+}
+
+async function addEntries() {
+    const REQ_INTERVAL = 200;
+    let kvm = localStorage.getItem("kvm");
+    let entries = document.getElementById("entries").value;
+    entries = JSON.parse(entries);
+
+    entries.forEach(async (entry) => {
+        if(entry.name === "" || entry.value === "" || typeof entry.name !== "string"|| typeof entry.value !== "string")
+            return alert("Empty or invalid entries format")
+
+        try {
+           await api.post(`/api/kvms/${kvm}/entries`, entry);       
+        } catch (error) {
+            alert(error.message)
+        }
+
+        // Sleep to prevent spike arrests
+        sleep(REQ_INTERVAL);
+    });
+
+    window.location.reload();
+};
+
+function closeEntriesPopup() {
+    document.getElementById("add-entries-popup").style.display = "none";
+}
+
 async function deleteEntry(kvm, key) {
-    let delete_btn = document.getElementById('delete_btn');
     let confirmDelete = confirm(`Confirm deletion of key: \n- ${key}`);
 
     if (confirmDelete) {
@@ -59,30 +93,10 @@ async function deleteEntry(kvm, key) {
     }
 }
 
-async function addEntries() {
-    let kvm = localStorage.getItem("kvm");
-    let entries = document.getElementById("entries").value;
-
-    JSON.parse(entries).forEach(async (entry) => {
-        if(entry.name === "" || entry.value === "" || typeof entry.name !== "string"|| typeof entry.value !== "string")
-            return alert("Empty or invalid entries format")
-        try {
-            await api.post(`/api/kvms/${kvm}/entries`, entry);            
-        } catch (error) {
-            alert(error.message)
-        }
-
-        // Sleep to prevent spike arrests
-        const SLEEP_TIME = 200;
-        sleep(SLEEP_TIME);
-    });
-    window.location.reload();
-};
-
 async function exportEntries() {
+    let entries = [];
     const kvm = localStorage.getItem('kvm');
     const env = localStorage.getItem('environment');
-    let entries = [];
 
     try {
         const fetch_entries = await api.get(`/api/kvms/${kvm}/entries`);
@@ -105,14 +119,6 @@ async function exportEntries() {
     }
 }
 
-function addEntriesPopup() {
-    document.getElementById("add-entries-popup").style.display = "flex";
-}
-
-function closeEntriesPopup() {
-    document.getElementById("add-entries-popup").style.display = "none";
-}
-
 function searchEntries() {
     const searchInput = document.getElementById('search-entry');
     const table = document.getElementById('kvm-entries-table');
@@ -128,8 +134,3 @@ function searchEntries() {
             row.style.display = 'none';
     });
 }
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-  

@@ -1,47 +1,25 @@
-async function getEntriesView(kvm) {
-    localStorage.setItem('kvm', kvm);
-    window.location.href = `/kvms/${kvm}/entries`;
-}
+async function environmentsToggle() { 
 
-async function listKeyValueMaps() {
-    localStorage.removeItem("kvm");
-    localStorage.removeItem("nextPageToken");
+    let environments
+    let fetch_environments;
+    let environments_toggle = document.getElementById('environment-list');
 
     try {
-        // Handle environments
-        const fetch_environments = await api.get(`/api/environments`);
-        const environments = await fetch_environments.data;
-        let environments_toggle = document.getElementById('environment-list');
-
-        if(environments_toggle.value == "" || localStorage.getItem("environment") == null) {
-            localStorage.setItem("environment", environments[0]);
-
-            environments.forEach(option => {
-                const optionElement = document.createElement('option');
-                optionElement.value = option;
-                optionElement.textContent = option;
-                environments_toggle.appendChild(optionElement);
-            });
-        }
-
-        // Show KVMs
-        const fetch_kvms = await api.get(`/api/kvms`);
-        let kvms = await fetch_kvms.data;
-        let kvms_list = document.getElementById('kvm-list');
-
-        kvms_list.innerHTML = ''
-        kvms.sort().forEach(async (kvm) => {
-            const list_item = document.createElement('li');
-            list_item.textContent = kvm;
-            list_item.className = 'list-item';
-
-            kvms_list.appendChild(list_item); 
-            
-            list_item.addEventListener('click', async () => getEntriesView(await kvm))            
-        });
+        fetch_environments = await api.get(`/api/environments`);
+        environments = await fetch_environments.data;
     } catch (error) {
         console.log(error);
-        window.location.href = `/`
+    }
+
+    if(environments_toggle.value == "" || localStorage.getItem("environment") == null) {
+        localStorage.setItem("environment", environments[0]);
+
+        environments.forEach(option => {
+            const optionElement = document.createElement('option');
+            optionElement.value = option;
+            optionElement.textContent = option;
+            environments_toggle.appendChild(optionElement);
+        });
     }
 }
 
@@ -51,11 +29,43 @@ async function updateEnvironment() {
     try {
         await api.put(`/api/environments`, { environment });
         localStorage.setItem("environment", environment);
-        listKeyValueMaps();
+        listKvms();
     } catch (error) {
         console.log(error);
     }
+}
 
+async function listKvms() {
+
+    let kvms;
+    let fetch_kvms;
+    let kvms_list = document.getElementById('kvm-list');
+
+    kvms_list.innerHTML = '';
+    localStorage.removeItem("kvm");
+    localStorage.removeItem("nextPageToken");
+
+    try {
+        fetch_kvms = await api.get(`/api/kvms`);
+        kvms = await fetch_kvms.data;
+    } catch (error) {
+        console.log(error);
+        window.location.href = `/`
+    }
+    
+    kvms.sort().forEach(async (kvm) => {
+        const list_item = document.createElement('li');
+        list_item.textContent = kvm;
+        list_item.className = 'list-item';
+        list_item.addEventListener('click', async () => {
+            localStorage.setItem('kvm', kvm);
+            window.location.href = `/kvms/${kvm}/entries`;
+        });      
+        kvms_list.appendChild(list_item); 
+    });
+
+    // Environments toggle
+    await environmentsToggle();
 }
 
 async function createKvm() {
